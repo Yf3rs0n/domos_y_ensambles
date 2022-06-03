@@ -22,19 +22,19 @@
 					<div class="container h-full">
 						<div class="flex-col-l-m h-full p-t-100 p-b-30 respon5">
 							<div class="layer-slick1 animated visible-false" data-appear="fadeInUp" data-delay="0">
-								<span class="ltext-201 cl2 respon2">
+								<span class="ltext-201 cl5 respon2">
 									<?= $arrSlider[$i]['nombre'] ?>
 								</span>
 							</div>
 								
 							<div class="layer-slick1 animated visible-false" data-appear="fadeInDown" data-delay="800">
-								<h2 class="ltext-101 cl2 p-t-19 p-b-43 respon1">
+								<h2 class="ltext-101 cl5 p-t-19 p-b-43 respon1">
 									<?= $arrSlider[$i]['descripcion'] ?>
 								</h2>
 							</div>
 								
 							<div class="layer-slick1 animated visible-false" data-appear="zoomIn" data-delay="1600">
-								<a href="<?= base_url().'/tienda/categoria/'.$arrSlider[$i]['idcategoria'].'/'.$ruta; ?>" class="flex-c-m stext-101 cl2 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04">
+								<a href="<?= base_url().'/tienda/categoria/'.$arrSlider[$i]['idcategoria'].'/'.$ruta; ?>" class="flex-c-m stext-101 cl5 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04">
 									Ver servicios
 								</a>
 							</div>
@@ -72,7 +72,7 @@
 							</div>
 							<div class="block1-txt-child2 p-b-4 trans-05">
 								<div class="block1-link stext-101 cl0 trans-09">
-									Ver productos
+									Ver servicios
 								</div>
 							</div>
 						</a>
@@ -89,8 +89,8 @@
 	<section class="bg0 p-t-23 p-b-140">
 		<div class="container">
 			<div class="p-b-10">
-				<h3 class="ltext-103 cl5">
-					Contratos
+				<h3 class="ltext-103 cl2">
+					Servicios
 				</h3>
 			</div>
 			<hr>

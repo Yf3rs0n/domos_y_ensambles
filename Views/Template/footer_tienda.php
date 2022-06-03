@@ -6,7 +6,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-6 col-lg-4 p-b-50">
-					<h4 class="stext-301 cl0 p-b-30">
+					<h4 class="stext-301 cl1 p-b-30">
 						Categorías
 					</h4>
 					<?php if(count($catFotter) > 0){ ?>
@@ -23,7 +23,7 @@
 				</div>
 
 				<div class="col-sm-6 col-lg-4 p-b-50">
-					<h4 class="stext-301 cl0 p-b-30">
+					<h4 class="stext-301 cl1 p-b-30">
 						Cotacto
 					</h4>
 
@@ -49,7 +49,7 @@
 				</div>
 
 				<div class="col-sm-6 col-lg-4 p-b-50">
-					<h4 class="stext-301 cl0 p-b-30">
+					<h4 class="stext-301 cl1 p-b-30">
 						Suscríbete
 					</h4>
 

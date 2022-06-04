@@ -12,7 +12,6 @@ tablePedidos = $('#tablePedidos').dataTable( {
     },
     "columns":[
         {"data":"idpedido"},
-        {"data":"transaccion"},
         {"data":"fecha"},
         {"data":"monto"},
         {"data":"tipopago"},
@@ -66,77 +65,6 @@ tablePedidos = $('#tablePedidos').dataTable( {
     "order":[[0,"desc"]]  
 });
 
-function fntTransaccion(idtransaccion){
-    let request = (window.XMLHttpRequest) ? 
-                    new XMLHttpRequest() : 
-                    new ActiveXObject('Microsoft.XMLHTTP');
-    let ajaxUrl = base_url+'/Pedidos/getTransaccion/'+idtransaccion;
-    divLoading.style.display = "flex";
-    request.open("GET",ajaxUrl,true);
-    request.send();
-    request.onreadystatechange = function(){
-        if(request.readyState == 4 && request.status == 200){
-            let objData = JSON.parse(request.responseText);
-            if(objData.status){   
-                document.querySelector("#divModal").innerHTML = objData.html;
-                $('#modalReembolso').modal('show');
-            }else{
-                swal("Error", objData.msg , "error");
-            }
-            divLoading.style.display = "none";
-            return false;
-        }
-    }
-}
-
-function fntReembolsar(){
-    let idtransaccion = document.querySelector("#idtransaccion").value;
-    let observacion = document.querySelector("#txtObservacion").value;
-    if(idtransaccion == '' || observacion == ''){
-        swal("", "Complete los datos para continuar." , "error");
-        return false;
-    }
-
-    swal({
-        title: "Hacer Reembolso",
-        text: "¿Realmente quiere realizar el reembolso?",
-        type: "warning",
-        showCancelButton: true,
-        confirmButtonText: "Si, eliminar!",
-        cancelButtonText: "No, cancelar!",
-        closeOnConfirm: true,
-        closeOnCancel: true
-    }, function(isConfirm) { 
-
-        if(isConfirm){ 
-            $('#modalReembolso').modal('hide');
-            divLoading.style.display = "flex";
-            let request = (window.XMLHttpRequest) ? 
-                    new XMLHttpRequest() : 
-                    new ActiveXObject('Microsoft.XMLHTTP');
-            let ajaxUrl = base_url+'/Pedidos/setReembolso';
-            let formData = new FormData();
-            formData.append('idtransaccion',idtransaccion);
-            formData.append('observacion',observacion);
-            request.open("POST",ajaxUrl,true);
-            request.send(formData);
-            request.onreadystatechange = function(){
-                if(request.readyState != 4) return;
-                if(request.status == 200){
-                    let objData = JSON.parse(request.responseText);
-                    if(objData.status){  
-                        window.location.reload();
-                    }else{
-                        swal("Error", objData.msg , "error");
-                    }
-                    divLoading.style.display = "none";
-                    return false;
-                }
-            }
-        }
-
-    });
-}
 
 function fntEditInfo(element,idpedido){
     rowTable = element.parentNode.parentNode.parentNode;
@@ -170,14 +98,6 @@ function fntUpdateInfo(){
     let formUpdatePedido = document.querySelector("#formUpdatePedido");
     formUpdatePedido.onsubmit = function(e) {
         e.preventDefault();
-        let transaccion;
-        if(document.querySelector("#txtTransaccion")){
-            transaccion = document.querySelector("#txtTransaccion").value;
-            if(transaccion == ""){
-                swal("", "Complete los datos para continuar." , "error");
-                return false;
-            }
-        }
 
         let request = (window.XMLHttpRequest) ? 
                     new XMLHttpRequest() : 

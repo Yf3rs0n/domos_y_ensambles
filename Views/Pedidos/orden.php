@@ -20,9 +20,6 @@
             $cliente = $data['arrPedido']['cliente']; 
             $orden = $data['arrPedido']['orden'];
             $detalle = $data['arrPedido']['detalle'];
-            $transaccion = $orden['idtransaccionpaypal'] != "" ? 
-                           $orden['idtransaccionpaypal'] : 
-                           $orden['referenciacobro'];
          ?>
         <section id="sPedido" class="invoice">
           <div class="row mb-4">
@@ -51,7 +48,6 @@
             </div>
             <div class="col-4"><b>Orden #<?= $orden['idpedido'] ?></b><br> 
                 <b>Pago: </b><?= $orden['tipopago'] ?><br>
-                <b>Transacción:</b> <?= $transaccion ?> <br>
                 <b>Estado:</b> <?= $orden['status'] ?> <br>
                 <b>Monto:</b> <?= SMONEY.' '. formatMoney($orden['monto']) ?>
             </div>

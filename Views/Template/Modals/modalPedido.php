@@ -26,18 +26,6 @@
                           <td><?= SMONEY.' '.$data['orden']['monto'] ?></td>
                       </tr>
                       <tr>
-                          <td>Transacción:</td>
-                          <td>
-                            <?php 
-                                if($data['orden']['tipopagoid'] == 1){
-                                    echo $data['orden']['idtransaccionpaypal'];
-                                }else{
-                            ?>
-                            <input type="text" name="txtTransaccion" id="txtTransaccion" class="form-control" value="<?= $data['orden']['referenciacobro'] ?>" required="">
-                                <?php } ?>
-                          </td>
-                      </tr>
-                      <tr>
                           <td>Tipo pago:</td>
                           <td>
                             <?php 

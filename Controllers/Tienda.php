@@ -97,7 +97,6 @@
 						$arrProducto = array('idproducto' => $idproducto,
 											'producto' => $arrInfoProducto['nombre'],
 											'cantidad' => $cantidad,
-											'precio' => $arrInfoProducto['precio'],
 											'imagen' => $arrInfoProducto['images'][0]['url_image']
 										);
 						if(isset($_SESSION['arrCarrito'])){

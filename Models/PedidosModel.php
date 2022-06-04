@@ -13,8 +13,7 @@
 				$where = " WHERE p.personaid = ".$idpersona;
 			}
 			$sql = "SELECT p.idpedido,
-							p.referenciacobro,
-							p.idtransaccionpaypal,
+							
 							DATE_FORMAT(p.fecha, '%d/%m/%Y') as fecha,
 							p.monto,
 							tp.tipopago,
@@ -35,8 +34,7 @@
 			}
 			$request = array();
 			$sql = "SELECT p.idpedido,
-							p.referenciacobro,
-							p.idtransaccionpaypal,
+							
 							p.personaid,
 							DATE_FORMAT(p.fecha, '%d/%m/%Y') as fecha,
 							p.costo_envio,
@@ -79,68 +77,13 @@
 			return $request;
 		}
 
-		public function selectTransPaypal(string $idtransaccion, $idpersona = NULL){
-			$busqueda = "";
-			if($idpersona != NULL){
-				$busqueda = " AND personaid =".$idpersona;
-			}
-			$objTransaccion = array();
-			$sql = "SELECT datospaypal FROM pedido WHERE idtransaccionpaypal = '{$idtransaccion}' ".$busqueda;
-			$requestData = $this->select($sql);
-			if(!empty($requestData)){
-				$objData = json_decode($requestData['datospaypal']);
-				//$urlOrden = $objData->purchase_units[0]->payments->captures[0]->links[2]->href;
-				$urlOrden = $objData->links[0]->href;
-				$objTransaccion = CurlConnectionGet($urlOrden,"application/json",getTokenPaypal());
-			}
-			return $objTransaccion;
-		}
-
-		public function reembolsoPaypal(string $idtransaccion, string $observacion){
-			$response = false;
-			$sql = "SELECT idpedido,datospaypal FROM pedido WHERE idtransaccionpaypal = '{$idtransaccion}' ";
-			$requestData = $this->select($sql);
-			if(!empty($requestData)){
-				$objData = json_decode($requestData['datospaypal']);
-				$urlReembolso = $objData->purchase_units[0]->payments->captures[0]->links[1]->href;
-				$objTransaccion = CurlConnectionPost($urlReembolso,"application/json",getTokenPaypal());
-				if(isset($objTransaccion->status) and  $objTransaccion->status == "COMPLETED"){
-					$idpedido = $requestData['idpedido'];
-					$idtrasaccion = $objTransaccion->id;
-					$status = $objTransaccion->status;
-					$jsonData = json_encode($objTransaccion);
-					$observacion = $observacion;
-					$query_insert  = "INSERT INTO reembolso(pedidoid,
-														idtransaccion,
-														datosreembolso,
-														observacion,
-														status) 
-								  	VALUES(?,?,?,?,?)";
-					$arrData = array($idpedido,
-	        						$idtrasaccion,
-	        						$jsonData,
-	        						$observacion,
-	        						$status
-	        					);
-					$request_insert = $this->insert($query_insert,$arrData);
-					if($request_insert > 0){
-	        			$updatePedido  = "UPDATE pedido SET status = ? WHERE idpedido = $idpedido";
-			        	$arrPedido = array("Reembolsado");
-			        	$request = $this->update($updatePedido,$arrPedido);
-			        	$response = true;
-	        		}
-				}
-				return $response;
-			}
-		}
-
-		public function updatePedido(int $idpedido, $transaccion = NULL, $idtipopago = NULL, string $estado){
-			if($transaccion == NULL){
+		public function updatePedido(int $idpedido, $idtipopago = NULL, string $estado){
+			if($idtipopago == NULL){
 				$query_insert  = "UPDATE pedido SET status = ?  WHERE idpedido = $idpedido ";
 	        	$arrData = array($estado);
 			}else{
-				$query_insert  = "UPDATE pedido SET referenciacobro = ?, tipopagoid = ?,status = ? WHERE idpedido = $idpedido";
-	        	$arrData = array($transaccion,
+				$query_insert  = "UPDATE pedido SET tipopagoid = ?,status = ? WHERE idpedido = $idpedido";
+	        	$arrData = array(
 	        					$idtipopago,
 	    						$estado
 	    					);

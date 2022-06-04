@@ -5,7 +5,7 @@ if(isset($_SESSION['arrCarrito']) and count($_SESSION['arrCarrito']) > 0){
 <ul class="header-cart-wrapitem w-full">
 <?php 
 	foreach ($_SESSION['arrCarrito'] as $producto) {
-	$total += $producto['cantidad'] * $producto['precio'];
+	$total += $producto['cantidad'];
 	$idProducto = openssl_encrypt($producto['idproducto'],METHODENCRIPT,KEY);	
  ?>	
 	<li class="header-cart-item flex-w flex-t m-b-12">
@@ -17,16 +17,13 @@ if(isset($_SESSION['arrCarrito']) and count($_SESSION['arrCarrito']) > 0){
 				<?= $producto['producto'] ?>
 			</a>
 			<span class="header-cart-item-info">
-				<?= $producto['cantidad'].' x '.SMONEY.formatMoney($producto['precio']) ?>
+				<?= $producto['cantidad']?>
 			</span>
 		</div>
 	</li>
 <?php } ?>
 </ul>
 <div class="w-full">
-	<div class="header-cart-total w-full p-tb-40">
-		Total: <?= SMONEY.formatMoney($total); ?>
-	</div>
 
 	<div class="header-cart-buttons flex-w w-full">
 		<a href="<?= base_url() ?>/carrito" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">

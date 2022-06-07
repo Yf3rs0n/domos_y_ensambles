@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 03-06-2022 a las 05:14:18
+-- Tiempo de generación: 07-06-2022 a las 23:01:51
 -- Versión del servidor: 10.4.21-MariaDB
 -- Versión de PHP: 8.0.10
 
@@ -92,7 +92,9 @@ INSERT INTO `detalle_pedido` (`id`, `pedidoid`, `productoid`, `precio`, `cantida
 (1, 1, 2, '200.00', 1),
 (2, 1, 1, '100.00', 2),
 (3, 2, 1, '100.00', 3),
-(4, 3, 2, '200.00', 1);
+(4, 3, 2, '200.00', 1),
+(5, 7, 2, '0.00', 1),
+(6, 8, 2, '0.00', 1);
 
 -- --------------------------------------------------------
 
@@ -153,9 +155,6 @@ INSERT INTO `modulo` (`idmodulo`, `titulo`, `descripcion`, `status`) VALUES
 
 CREATE TABLE `pedido` (
   `idpedido` bigint(20) NOT NULL,
-  `referenciacobro` varchar(255) COLLATE utf8mb4_swedish_ci DEFAULT NULL,
-  `idtransaccionpaypal` varchar(255) COLLATE utf8mb4_swedish_ci DEFAULT NULL,
-  `datospaypal` text COLLATE utf8mb4_swedish_ci DEFAULT NULL,
   `personaid` bigint(20) NOT NULL,
   `fecha` datetime NOT NULL DEFAULT current_timestamp(),
   `costo_envio` decimal(10,2) NOT NULL DEFAULT 0.00,
@@ -169,10 +168,15 @@ CREATE TABLE `pedido` (
 -- Volcado de datos para la tabla `pedido`
 --
 
-INSERT INTO `pedido` (`idpedido`, `referenciacobro`, `idtransaccionpaypal`, `datospaypal`, `personaid`, `fecha`, `costo_envio`, `monto`, `tipopagoid`, `direccion_envio`, `status`) VALUES
-(1, '4561654687', NULL, NULL, 3, '2021-08-20 03:41:57', '50.00', '450.00', 3, 'Antigua Guatemala, Antigua Guatemala', 'Pendiente'),
-(2, NULL, '8XD37465755620710', '{\"id\":\"4S6284553D668511R\",\"intent\":\"CAPTURE\",\"status\":\"COMPLETED\",\"purchase_units\":[{\"reference_id\":\"default\",\"amount\":{\"currency_code\":\"USD\",\"value\":\"350.00\"},\"payee\":{\"email_address\":\"sb-6z0da4580133@business.example.com\",\"merchant_id\":\"ULNZF7CTTE748\"},\"description\":\"Compra de artículos en Tienda Virtual por $350 \",\"soft_descriptor\":\"PAYPAL *JOHNDOESTES\",\"shipping\":{\"name\":{\"full_name\":\"John Doe\"},\"address\":{\"address_line_1\":\"Free Trade Zone\",\"admin_area_2\":\"Guatemala City\",\"admin_area_1\":\"Guatemala City\",\"postal_code\":\"01001\",\"country_code\":\"GT\"}},\"payments\":{\"captures\":[{\"id\":\"8XD37465755620710\",\"status\":\"COMPLETED\",\"amount\":{\"currency_code\":\"USD\",\"value\":\"350.00\"},\"final_capture\":true,\"seller_protection\":{\"status\":\"ELIGIBLE\",\"dispute_categories\":[\"ITEM_NOT_RECEIVED\",\"UNAUTHORIZED_TRANSACTION\"]},\"create_time\":\"2021-08-20T09:48:38Z\",\"update_time\":\"2021-08-20T09:48:38Z\"}]}}],\"payer\":{\"name\":{\"given_name\":\"John\",\"surname\":\"Doe\"},\"email_address\":\"sb-iimwo4579006@personal.example.com\",\"payer_id\":\"ZTA3QXTY5JS6Q\",\"address\":{\"country_code\":\"GT\"}},\"create_time\":\"2021-08-20T09:46:25Z\",\"update_time\":\"2021-08-20T09:48:38Z\",\"links\":[{\"href\":\"https://api.sandbox.paypal.com/v2/checkout/orders/4S6284553D668511R\",\"rel\":\"self\",\"method\":\"GET\"}]}', 3, '2021-08-20 03:48:39', '50.00', '350.00', 1, 'Guatemala, Guatemala', 'Completo'),
-(3, NULL, NULL, NULL, 1, '2022-05-25 12:28:34', '5.00', '205.00', 4, 'ede, dsd', 'Pendiente');
+INSERT INTO `pedido` (`idpedido`, `personaid`, `fecha`, `costo_envio`, `monto`, `tipopagoid`, `direccion_envio`, `status`) VALUES
+(1, 3, '2021-08-20 03:41:57', '50.00', '450.00', 3, 'Antigua Guatemala, Antigua Guatemala', 'Pendiente'),
+(2, 3, '2021-08-20 03:48:39', '50.00', '350.00', 1, 'Guatemala, Guatemala', 'Completo'),
+(3, 1, '2022-05-25 12:28:34', '5.00', '205.00', 4, 'ede, dsd', 'Pendiente'),
+(4, 1, '2022-06-07 14:32:47', '5.00', '6.00', 2, 'Cr47872, Medellín', 'Pendiente'),
+(5, 1, '2022-06-07 14:36:29', '5.00', '6.00', 2, 'Cr26262, Medellin', 'Pendiente'),
+(6, 1, '2022-06-07 14:38:17', '5.00', '6.00', 2, 'Cr 49 #21-33, Medellín', 'Pendiente'),
+(7, 1, '2022-06-07 14:40:02', '5.00', '6.00', 2, 'Cr12, Medellín', 'Pendiente'),
+(8, 1, '2022-06-07 14:41:30', '5.00', '6.00', 2, 'Cr 4773 1122, Medellín', 'Pendiente');
 
 -- --------------------------------------------------------
 
@@ -500,7 +504,7 @@ ALTER TABLE `contacto`
 -- AUTO_INCREMENT de la tabla `detalle_pedido`
 --
 ALTER TABLE `detalle_pedido`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `imagen`
@@ -518,7 +522,7 @@ ALTER TABLE `modulo`
 -- AUTO_INCREMENT de la tabla `pedido`
 --
 ALTER TABLE `pedido`
-  MODIFY `idpedido` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `idpedido` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `permisos`

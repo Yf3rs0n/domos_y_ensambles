@@ -4,7 +4,7 @@ headerTienda($data);
 $subtotal = 0;
 $total = 0;
 foreach ($_SESSION['arrCarrito'] as $producto) {
-	$subtotal += $producto['precio'] * $producto['cantidad'];
+	$subtotal += $producto['cantidad'];
 }
 $total = $subtotal + COSTOENVIO;
 

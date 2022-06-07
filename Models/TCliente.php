@@ -44,13 +44,11 @@ trait TCliente{
         return $return;
 	}
 
-	public function insertPedido(string $idtransaccionpaypal = NULL, string $datospaypal = NULL, int $personaid, float $costo_envio, string $monto, int $tipopagoid, string $direccionenvio, string $status){
+	public function insertPedido(int $personaid, float $costo_envio, string $monto, int $tipopagoid, string $direccionenvio, string $status){
 		$this->con = new Mysql();
-		$query_insert  = "INSERT INTO pedido(idtransaccionpaypal,datospaypal,personaid,costo_envio,monto,tipopagoid,direccion_envio,status) 
-							  VALUES(?,?,?,?,?,?,?,?)";
-		$arrData = array($idtransaccionpaypal,
-    						$datospaypal,
-    						$personaid,
+		$query_insert  = "INSERT INTO pedido(personaid,costo_envio,monto,tipopagoid,direccion_envio,status) 
+							  VALUES(?,?,?,?,?,?)";
+		$arrData = array($personaid,
     						$costo_envio,
     						$monto,
     						$tipopagoid,
@@ -62,13 +60,12 @@ trait TCliente{
 	    return $return;
 	}
 
-	public function insertDetalle(int $idpedido, int $productoid, float $precio, int $cantidad){
+	public function insertDetalle(int $idpedido, int $productoid, int $cantidad){
 		$this->con = new Mysql();
-		$query_insert  = "INSERT INTO detalle_pedido(pedidoid,productoid,precio,cantidad) 
-							  VALUES(?,?,?,?)";
+		$query_insert  = "INSERT INTO detalle_pedido(pedidoid,productoid,cantidad) 
+							  VALUES(?,?,?)";
 		$arrData = array($idpedido,
     					$productoid,
-						$precio,
 						$cantidad
 					);
 		$request_insert = $this->con->insert($query_insert,$arrData);
@@ -122,8 +119,6 @@ trait TCliente{
 		$this->con = new Mysql();
 		$request = array();
 		$sql = "SELECT p.idpedido,
-							p.referenciacobro,
-							p.idtransaccionpaypal,
 							p.personaid,
 							p.fecha,
 							p.costo_envio,
@@ -140,7 +135,6 @@ trait TCliente{
 		if(count($requestPedido) > 0){
 			$sql_detalle = "SELECT p.idproducto,
 											p.nombre as producto,
-											d.precio,
 											d.cantidad
 									FROM detalle_pedido d
 									INNER JOIN producto p

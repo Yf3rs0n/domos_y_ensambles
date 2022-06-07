@@ -12,10 +12,7 @@
 				$busqueda = " AND p.personaid =".$idpersona;
 			}
 			$request = array();
-			$sql = "SELECT p.idpedido,
-							p.referenciacobro,
-							p.idtransaccionpaypal,
-							p.personaid,
+			$sql = "SELECT p.personaid,
 							DATE_FORMAT(p.fecha, '%d/%m/%Y') as fecha,
 							p.costo_envio,
 							p.monto,
@@ -42,7 +39,6 @@
 				$requestcliente = $this->select($sql_cliente);
 				$sql_detalle = "SELECT p.idproducto,
 											p.nombre as producto,
-											d.precio,
 											d.cantidad
 									FROM detalle_pedido d
 									INNER JOIN producto p

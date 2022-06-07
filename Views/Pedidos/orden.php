@@ -58,7 +58,7 @@
                 <thead>
                   <tr>
                     <th>Descripción</th>
-                    <th class="text-right">Precio</th>
+                    <th class="text-right">Monto</th>
                     <th class="text-center">Cantidad</th>
                     <th class="text-right">Importe</th>
                   </tr>
@@ -68,13 +68,13 @@
                         $subtotal = 0;
                         if(count($detalle) > 0){
                             foreach ($detalle as $producto) {
-                                $subtotal += $producto['cantidad'] * $producto['precio'];
+                                $subtotal += $producto['cantidad'] * $orden['monto'] ;
                      ?>
                   <tr>
                     <td><?= $producto['producto'] ?></td>
-                    <td class="text-right"><?= SMONEY.' '. formatMoney($producto['precio']) ?></td>
+                    <td class="text-right"><?= SMONEY.' '. formatMoney($orden['monto']) ?></td>
                     <td class="text-center"><?= $producto['cantidad'] ?></td>
-                    <td class="text-right"><?= SMONEY.' '. formatMoney($producto['cantidad'] * $producto['precio']) ?></td>
+                    <td class="text-right"><?= SMONEY.' '. formatMoney($producto['cantidad'] * $orden['monto']) ?></td>
                   </tr>
                   <?php 
                             }
@@ -83,12 +83,10 @@
                 </tbody>
                 <tfoot>
                     <tr>
-                        <th colspan="3" class="text-right">Sub-Total:</th>
-                        <td class="text-right"><?= SMONEY.' '. formatMoney($subtotal) ?></td>
+                        
                     </tr>
                     <tr>
-                        <th colspan="3" class="text-right">Envío:</th>
-                        <td class="text-right"><?= SMONEY.' '. formatMoney($orden['costo_envio']) ?></td>
+                      
                     </tr>
                     <tr>
                         <th colspan="3" class="text-right">Total:</th>

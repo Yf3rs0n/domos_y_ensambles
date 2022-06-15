@@ -25,6 +25,8 @@
                           <th>Fecha</th>
                           <th>Monto</th>
                           <th>Tipo pago</th>
+                          <th>Materiales</th>
+                          <th>Detalles</th>
                           <th>Estado</th>
                           <th>Acciones</th>
                         </tr>

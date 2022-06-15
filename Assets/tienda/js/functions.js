@@ -289,7 +289,20 @@ if(document.querySelector("#txtCiudad")){
 		fntViewPago();
 	});
 }
-
+if (document.querySelector("#txtMateriales")) {
+	let ciudad = document.querySelector("#txtMateriales");
+	ciudad.addEventListener('keyup', function () {
+		let c = this.value;
+		fntViewPago();
+	});
+}
+if (document.querySelector("#txtDetalles")) {
+	let ciudad = document.querySelector("#txtDetalles");
+	ciudad.addEventListener('keyup', function () {
+		let c = this.value;
+		fntViewPago();
+	});
+}
 if(document.querySelector("#condiciones")){
 	let opt = document.querySelector("#condiciones");
 	opt.addEventListener('click', function(){
@@ -305,7 +318,9 @@ if(document.querySelector("#condiciones")){
 function fntViewPago(){
 	let direccion = document.querySelector("#txtDireccion").value;
 	let ciudad = document.querySelector("#txtCiudad").value;
-	if(direccion == "" || ciudad == ""){
+	let materiales = document.querySelector("#txtMateriales").value;
+	let detalles = document.querySelector("#txtDetalles").value;
+	if(direccion == "" || ciudad == "" || materiales == "" || detalles == ""){
 		document.querySelector('#divMetodoPago').classList.add("notblock");
 	}else{
 		document.querySelector('#divMetodoPago').classList.remove("notblock");
@@ -317,8 +332,10 @@ if(document.querySelector("#btnComprar")){
 	btnPago.addEventListener('click',function() { 
 		let dir = document.querySelector("#txtDireccion").value;
 	    let ciudad = document.querySelector("#txtCiudad").value;
+		let materiales = document.querySelector("#txtMateriales").value;
+		let detalles = document.querySelector("#txtDetalles").value;
 	    let inttipopago = document.querySelector("#listtipopago").value; 
-	    if( txtDireccion == "" || txtCiudad == "" || inttipopago =="" ){
+	    if( txtDireccion == "" || txtCiudad == "" || txtMateriales == "" || txtDetalles == "" || inttipopago == ""){
 			swal("", "Complete datos de envío" , "error");
 			return;
 		}else{
@@ -330,6 +347,8 @@ if(document.querySelector("#btnComprar")){
 			let formData = new FormData();
 		    formData.append('direccion',dir);    
 		   	formData.append('ciudad',ciudad);
+		    formData.append('materiales',materiales);
+			formData.append('detalles',detalles);
 			formData.append('inttipopago',inttipopago);
 		   	request.open("POST",ajaxUrl,true);
 		    request.send(formData);

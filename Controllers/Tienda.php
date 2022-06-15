@@ -262,12 +262,12 @@
 
 		public function procesarVenta(){//procesar venta
 			if($_POST){
-				$idtransaccionpaypal = NULL;
-				$datospaypal = NULL;
 				$personaid = $_SESSION['idUser'];
 				$monto = 0;
 				$tipopagoid = intval($_POST['inttipopago']);
 				$direccionenvio = strClean($_POST['direccion']).', '.strClean($_POST['ciudad']);
+				$materiales = strClean ($_POST['materiales']);
+				$detalles = strClean($_POST['detalles']);
 				$status = "Pendiente";
 				$subtotal = 0;
 				$costo_envio = COSTOENVIO;
@@ -284,14 +284,18 @@
 															$costo_envio,
 															$monto, 
 															$tipopagoid,
-															$direccionenvio, 
+															$direccionenvio,
+															$materiales,
+															$detalles, 
 															$status);
 						if($request_pedido > 0 ){
 							//Insertamos detalle
 							foreach ($_SESSION['arrCarrito'] as $producto) {
 								$productoid = $producto['idproducto'];
 								$cantidad = $producto['cantidad'];
-								$this->insertDetalle($request_pedido,$productoid,$cantidad);
+								$materiales = $producto['materiales'];
+								$detalles = $producto['detalles'];
+								$this->insertDetalle($request_pedido,$productoid,$cantidad,$materiales,$detalles);
 							}
 
 							$infoOrden = $this->getPedido($request_pedido);

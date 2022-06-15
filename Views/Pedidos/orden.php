@@ -52,6 +52,29 @@
                 <b>Monto:</b> <?= SMONEY.' '. formatMoney($orden['monto']) ?>
             </div>
           </div>
+          <div class="row invoice-info">
+            <div class="col-6 ">
+              <address><strong>Detalle</strong><br>
+                <?= $orden['detalles'] ?>
+              </address>
+            </div>
+            <div class="col-6">
+              <address><strong>Materiales</strong><br>
+                <?= $orden['materiales'] ?>
+              </address>
+            </div>
+          </div>
+    
+          <!-- <div class="row">
+            <div class="col-12 table-responsive">
+              <b>Materiales:</b><?= $orden['materiales'] ?>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12 table-responsive">
+              <b>Detalle:</b><?= $orden['detalles'] ?>
+            </div>
+          </div> -->
           <div class="row">
             <div class="col-12 table-responsive">
               <table class="table table-striped">

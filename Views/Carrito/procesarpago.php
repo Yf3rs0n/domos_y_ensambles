@@ -30,6 +30,8 @@ $infoTerminos = !empty(getInfoPage(PTERMINOS)) ? getInfoPage(PTERMINOS)['conteni
       		let base_url = "<?= base_url(); ?>";
 	        let dir = document.querySelector("#txtDireccion").value;
 	        let ciudad = document.querySelector("#txtCiudad").value;
+			let materiales = document.querySelector("#txtMateriales").value;
+			let detalles = document.querySelector("#txtDetalles").value;
 	        let inttipopago = 1; 
 	        let request = (window.XMLHttpRequest) ? 
 	                    new XMLHttpRequest() : 
@@ -38,6 +40,8 @@ $infoTerminos = !empty(getInfoPage(PTERMINOS)) ? getInfoPage(PTERMINOS)['conteni
 			let formData = new FormData();
 		    formData.append('direccion',dir);    
 		   	formData.append('ciudad',ciudad);
+			formData.append('materiales',materiales);
+			formData.append('detalles',detalles);
 			formData.append('inttipopago',inttipopago);
 		   	formData.append('datapay',JSON.stringify(details));
 		   	request.open("POST",ajaxUrl,true);
@@ -104,13 +108,21 @@ $infoTerminos = !empty(getInfoPage(PTERMINOS)) ? getInfoPage(PTERMINOS)['conteni
 						if(isset($_SESSION['login'])){
 					?>
 						<div>
-							<label for="tipopago">Dirección de envío</label>
+							<label for="tipopago">Dirección</label>
 							<div class="bor8 bg0 m-b-12">
-								<input id="txtDireccion" class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="state" placeholder="Dirección de envío">
+								<input id="txtDireccion" class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="state" placeholder="Dirección">
 							</div>
 							<div class="bor8 bg0 m-b-22">
-								<input id="txtCiudad" class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="postcode" placeholder="Ciudad / Estado">
+								<input id="txtCiudad" class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="postcode" placeholder="Ciudad / Municipio">
 							</div>
+							<!-- Nuevos Campos del contrato -->
+							<div class="bor8 bg0 m-b-22">
+								<input id="txtMateriales" class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="postcode" placeholder="Materiales requeridos">
+							</div>
+							<div class="bor8 bg0 m-b-22">
+								<input id="txtDetalles" class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="postcode" placeholder="Detalles Agregados">
+							</div>
+
 							<!-- mas campos de contrato -->
 						</div>
 					<?php }else{ ?>

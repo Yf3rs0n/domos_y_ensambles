@@ -19,6 +19,8 @@
 							p.tipopagoid,
 							t.tipopago,
 							p.direccion_envio,
+							p.materiales,
+							P.detalles,
 							p.status
 					FROM pedido as p
 					INNER JOIN tipopago t

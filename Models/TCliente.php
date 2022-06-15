@@ -44,15 +44,17 @@ trait TCliente{
         return $return;
 	}
 
-	public function insertPedido(int $personaid, float $costo_envio, string $monto, int $tipopagoid, string $direccionenvio, string $status){
+	public function insertPedido(int $personaid, float $costo_envio, string $monto, int $tipopagoid, string $direccionenvio,string $materiales, string $detalles, string $status){
 		$this->con = new Mysql();
-		$query_insert  = "INSERT INTO pedido(personaid,costo_envio,monto,tipopagoid,direccion_envio,status) 
-							  VALUES(?,?,?,?,?,?)";
+		$query_insert  = "INSERT INTO pedido(personaid,costo_envio,monto,tipopagoid,direccion_envio,materiales,detalles,status) 
+							  VALUES(?,?,?,?,?,?,?,?)";
 		$arrData = array($personaid,
     						$costo_envio,
     						$monto,
     						$tipopagoid,
     						$direccionenvio,
+							$materiales,
+							$detalles,
     						$status
     					);
 		$request_insert = $this->con->insert($query_insert,$arrData);
@@ -126,6 +128,8 @@ trait TCliente{
 							p.tipopagoid,
 							t.tipopago,
 							p.direccion_envio,
+							p.materiales,
+							p.detalles,
 							p.status
 					FROM pedido as p
 					INNER JOIN tipopago t

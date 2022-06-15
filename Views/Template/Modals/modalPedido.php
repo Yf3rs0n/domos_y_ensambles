@@ -23,7 +23,9 @@
                       </tr>
                       <tr>
                           <td>Importe total:</td>
+                          <!-- Editar el campo de monto -->
                           <td><?= SMONEY.' '.$data['orden']['monto'] ?></td>
+
                       </tr>
                       <tr>
                           <td>Tipo pago:</td>
@@ -63,13 +65,20 @@
                               </select>
                           </td>
                       </tr>
+                      <!-- <tr>
+                        <td>Materiales:</td>
+                        <td><?= $data['orden']['materiales'] ?></td>
+                      </tr>
+                      <tr>
+                        <td>Detalles:</td>
+                        <td><?= $data['orden']['detalles'] ?></td>
+                      </tr> -->
                   </tbody>
               </table>
               <div class="tile-footer">
                 <button id="btnActionForm" class="btn btn-info" type="submit" ><i class="fa fa-fw fa-lg fa-check-circle"></i><span>Actualizar</span></button>&nbsp;&nbsp;&nbsp;
                 <button class="btn btn-danger" type="button" data-dismiss="modal"><i class="fa fa-fw fa-lg fa-times-circle"></i>Cerrar</button>
             </div>
-              
             </form>
       </div>
     </div>

@@ -15,6 +15,8 @@ tablePedidos = $('#tablePedidos').dataTable( {
         {"data":"fecha"},
         {"data":"monto"},
         {"data":"tipopago"},
+        {"data":"materiales"},
+        {"data":"detalles"},
         {"data":"status"},
         {"data":"options"}
     ],

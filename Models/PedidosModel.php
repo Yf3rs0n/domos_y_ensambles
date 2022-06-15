@@ -18,6 +18,8 @@
 							p.monto,
 							tp.tipopago,
 							tp.idtipopago,
+							p.materiales,
+							p.detalles,
 							p.status 
 					FROM pedido p 
 					INNER JOIN tipopago tp
@@ -42,6 +44,8 @@
 							p.tipopagoid,
 							t.tipopago,
 							p.direccion_envio,
+							p.materiales,
+							P.detalles,
 							p.status
 					FROM pedido as p
 					INNER JOIN tipopago t

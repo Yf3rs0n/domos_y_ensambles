@@ -39,7 +39,7 @@
           <a href="<?= base_url() ?>/productos" class="linkw">
             <div class="widget-small warning coloured-icon"><i class="icon fa fa fa-archive fa-3x"></i>
               <div class="info">
-                <h4>Productos</h4>
+                <h4>Servicios</h4>
                 <p><b><?= $data['productos'] ?></b></p>
               </div>
             </div>
@@ -51,7 +51,7 @@
           <a href="<?= base_url() ?>/pedidos" class="linkw">
             <div class="widget-small danger coloured-icon"><i class="icon fa fa-shopping-cart fa-3x"></i>
               <div class="info">
-                <h4>Pedidos</h4>
+                <h4>Contratos</h4>
                 <p><b><?= $data['pedidos'] ?></b></p>
               </div>
             </div>

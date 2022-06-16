@@ -13,7 +13,6 @@
 				$where = " WHERE p.personaid = ".$idpersona;
 			}
 			$sql = "SELECT p.idpedido,
-							
 							DATE_FORMAT(p.fecha, '%d/%m/%Y') as fecha,
 							p.monto,
 							tp.tipopago,
@@ -36,7 +35,6 @@
 			}
 			$request = array();
 			$sql = "SELECT p.idpedido,
-							
 							p.personaid,
 							DATE_FORMAT(p.fecha, '%d/%m/%Y') as fecha,
 							p.costo_envio,

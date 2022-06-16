@@ -119,9 +119,9 @@ function fntUpdateInfo(){
                     if(document.querySelector("#txtTransaccion")){
                         rowTable.cells[1].textContent = document.querySelector("#txtTransaccion").value;
                         rowTable.cells[4].textContent = document.querySelector("#listTipopago").selectedOptions[0].innerText;
-                        rowTable.cells[5].textContent = document.querySelector("#listEstado").value;
+                        rowTable.cells[6].textContent = document.querySelector("#listEstado").value;
                     }else{
-                        rowTable.cells[5].textContent = document.querySelector("#listEstado").value;
+                        rowTable.cells[6].textContent = document.querySelector("#listEstado").value;
                     }
                 }else{
                     swal("Error", objData.msg , "error");

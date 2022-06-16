@@ -1,6 +1,8 @@
 <?php 
     use PHPMailer\PHPMailer\PHPMailer;
     use PHPMailer\PHPMailer\Exception;
+use PHPMailer\PHPMailer\SMTP;
+
     require 'Libraries/phpmailer/Exception.php';
     require 'Libraries/phpmailer/PHPMailer.php';
     require 'Libraries/phpmailer/SMTP.php';
@@ -90,13 +92,13 @@
                 $mail->isSMTP();                                            //Send using SMTP
                 $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
                 $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-                $mail->Username   = 'toolsfordeveloper@gmail.com';          //SMTP username
-                $mail->Password   = '@dmin08a';                               //SMTP password
+                $mail->Username   = 'domosyensambles01@gmail.com';          //SMTP username
+                $mail->Password   = 'xxbiebrrsudgffiu';                               //SMTP password
                 $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
                 $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
                 //Recipients
-                $mail->setFrom('toolsfordeveloper@gmail.com', 'Servidor Local');
+                $mail->setFrom('domosyensambles01@gmail.com', 'Servidor Local');
                 $mail->addAddress($data['email']);     //Add a recipient
                 if(!empty($data['emailCopia'])){
                     $mail->addBCC($data['emailCopia']);
@@ -124,17 +126,17 @@
 
         try {
             //Server settings
-            $mail->SMTPDebug = 1;                      //Enable verbose debug output
+            $mail->SMTPDebug = SMTP::DEBUG_SERVER;                     //Enable verbose debug output
             $mail->isSMTP();                                            //Send using SMTP
             $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
             $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-            $mail->Username   = 'toolsfordeveloper@gmail.com';                     //SMTP username
-            $mail->Password   = '';                               //SMTP password
+            $mail->Username   = 'domosyensambles01@gmail.com';                     //SMTP username
+            $mail->Password   = 'xxbiebrrsudgffiu';                               //SMTP password
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
-            $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+            $mail->Port       =  465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
             //Recipients
-            $mail->setFrom('toolsfordeveloper@gmail.com', 'Servidor Local');
+            $mail->setFrom('domosyensambles01@gmail.com', 'Servidor Local');
             $mail->addAddress($data['email']);     //Add a recipient
             if(!empty($data['emailCopia'])){
                 $mail->addBCC($data['emailCopia']);

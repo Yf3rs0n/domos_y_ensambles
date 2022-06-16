@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 07-06-2022 a las 23:01:51
+-- Tiempo de generación: 16-06-2022 a las 04:43:27
 -- Versión del servidor: 10.4.21-MariaDB
 -- Versión de PHP: 8.0.10
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `db_tiendavirtual`
+-- Base de datos: `bd_domos_y_ensambles`
 --
 
 -- --------------------------------------------------------
@@ -68,7 +68,8 @@ CREATE TABLE `contacto` (
 
 INSERT INTO `contacto` (`id`, `nombre`, `email`, `mensaje`, `ip`, `dispositivo`, `useragent`, `datecreated`) VALUES
 (1, 'Fernando Herrera', 'toolsfordeveloper@gmail.com', 'Mensaje del primer suscriptor!', '127.0.0.1', 'PC', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101 Firefox/91.0', '2021-08-20 04:06:18'),
-(2, 'Yeferson', 'yfersjjhhb@gmail.com', 'hola', '::1', 'PC', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.67 Safari/537.36', '2022-05-24 20:51:26');
+(2, 'Yeferson', 'yfersjjhhb@gmail.com', 'hola', '::1', 'PC', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.67 Safari/537.36', '2022-05-24 20:51:26'),
+(3, 'Yeferson', 'yferson5020@gmail.com', 'hoola', '::1', 'PC', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.0.0 Safari/537.36', '2022-06-15 20:57:58');
 
 -- --------------------------------------------------------
 
@@ -161,6 +162,8 @@ CREATE TABLE `pedido` (
   `monto` decimal(11,2) NOT NULL,
   `tipopagoid` bigint(20) NOT NULL,
   `direccion_envio` text COLLATE utf8mb4_swedish_ci NOT NULL,
+  `materiales` text COLLATE utf8mb4_swedish_ci NOT NULL,
+  `detalles` text COLLATE utf8mb4_swedish_ci NOT NULL,
   `status` varchar(100) COLLATE utf8mb4_swedish_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_swedish_ci;
 
@@ -168,15 +171,15 @@ CREATE TABLE `pedido` (
 -- Volcado de datos para la tabla `pedido`
 --
 
-INSERT INTO `pedido` (`idpedido`, `personaid`, `fecha`, `costo_envio`, `monto`, `tipopagoid`, `direccion_envio`, `status`) VALUES
-(1, 3, '2021-08-20 03:41:57', '50.00', '450.00', 3, 'Antigua Guatemala, Antigua Guatemala', 'Pendiente'),
-(2, 3, '2021-08-20 03:48:39', '50.00', '350.00', 1, 'Guatemala, Guatemala', 'Completo'),
-(3, 1, '2022-05-25 12:28:34', '5.00', '205.00', 4, 'ede, dsd', 'Pendiente'),
-(4, 1, '2022-06-07 14:32:47', '5.00', '6.00', 2, 'Cr47872, Medellín', 'Pendiente'),
-(5, 1, '2022-06-07 14:36:29', '5.00', '6.00', 2, 'Cr26262, Medellin', 'Pendiente'),
-(6, 1, '2022-06-07 14:38:17', '5.00', '6.00', 2, 'Cr 49 #21-33, Medellín', 'Pendiente'),
-(7, 1, '2022-06-07 14:40:02', '5.00', '6.00', 2, 'Cr12, Medellín', 'Pendiente'),
-(8, 1, '2022-06-07 14:41:30', '5.00', '6.00', 2, 'Cr 4773 1122, Medellín', 'Pendiente');
+INSERT INTO `pedido` (`idpedido`, `personaid`, `fecha`, `costo_envio`, `monto`, `tipopagoid`, `direccion_envio`, `materiales`, `detalles`, `status`) VALUES
+(1, 3, '2021-08-20 03:41:57', '50.00', '450.00', 3, 'Antigua Guatemala, Antigua Guatemala', '', '', 'Pendiente'),
+(2, 3, '2021-08-20 03:48:39', '50.00', '350.00', 1, 'Guatemala, Guatemala', '', '', 'Completo'),
+(3, 1, '2022-05-25 12:28:34', '5.00', '205.00', 4, 'ede, dsd', '', '', 'Pendiente'),
+(4, 1, '2022-06-07 14:32:47', '5.00', '6.00', 2, 'Cr47872, Medellín', '', '', 'Pendiente'),
+(5, 1, '2022-06-07 14:36:29', '5.00', '6.00', 2, 'Cr26262, Medellin', '', '', 'Pendiente'),
+(6, 1, '2022-06-07 14:38:17', '5.00', '6.00', 3, 'Cr 49 #21-33, Medellín', '', '', 'Pendiente'),
+(7, 1, '2022-06-07 14:40:02', '5.00', '6.00', 3, 'Cr12, Medellín', '', '', 'Completo'),
+(8, 1, '2022-06-07 14:41:30', '5.00', '6.00', 2, 'Cr 4773 1122, Medellín', '', '', 'Aprobado');
 
 -- --------------------------------------------------------
 
@@ -264,10 +267,11 @@ CREATE TABLE `persona` (
 --
 
 INSERT INTO `persona` (`idpersona`, `identificacion`, `nombres`, `apellidos`, `telefono`, `email_user`, `password`, `nit`, `nombrefiscal`, `direccionfiscal`, `token`, `rolid`, `datecreated`, `status`) VALUES
-(1, '24091989', 'Abel', 'OSH', 123456, 'info@abelosh.com', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', 'CF', 'Abel OSH', 'Ciudad', NULL, 1, '2021-08-20 01:34:15', 1),
+(1, '24091989', 'Yeferson', 'Agudelo', 123456, 'yferson5020@gmail.com', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', 'CF', 'Yeferson De Jesus Agudelo Quirama', 'Campo Valdes - Medellín', '745525ac787ed6b83b2a-af528c7a3c89c200c287-198eac68246bba58c5aa-144a08705ced91bf348a', 1, '2021-08-20 01:34:15', 1),
 (2, '24091990', 'Alex', 'Arana', 456878977, 'alex@info.com', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', NULL, NULL, NULL, NULL, 2, '2021-08-20 02:58:47', 1),
 (3, '84654864', 'Ricardo', 'Hernández Pérez', 4687987, 'hr@info.com', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', '468798', 'Ricardo HP', 'Ciudad de Guatemala', NULL, 3, '2021-08-20 03:41:28', 1),
-(4, '798465877', 'Fernando', 'Guerra', 468498, 'fer@info.com', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', NULL, NULL, NULL, NULL, 4, '2021-08-21 18:07:00', 1);
+(4, '798465877', 'Fernando', 'Guerra', 468498, 'fer@info.com', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', NULL, NULL, NULL, NULL, 4, '2021-08-21 18:07:00', 1),
+(5, NULL, 'Lucas', 'Guerra', 1223344, 'indexhtml811@gmail.com', 'd8245c9ca632026357bff2cc17d99df41324b12bc986fb59cd132034f5742def', NULL, NULL, NULL, '44b97bfd603e349cb867-d3ec5e35ba9584179524-c2312210894c4adf374c-107c146b5e021d6d0a19', 3, '2022-06-15 21:00:03', 1);
 
 -- --------------------------------------------------------
 
@@ -498,7 +502,7 @@ ALTER TABLE `categoria`
 -- AUTO_INCREMENT de la tabla `contacto`
 --
 ALTER TABLE `contacto`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `detalle_pedido`
@@ -534,7 +538,7 @@ ALTER TABLE `permisos`
 -- AUTO_INCREMENT de la tabla `persona`
 --
 ALTER TABLE `persona`
-  MODIFY `idpersona` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `idpersona` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `post`

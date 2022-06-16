@@ -6,7 +6,7 @@
 
 	//Datos de conexión a Base de Datos
 	const DB_HOST = "localhost";
-	const DB_NAME = "db_tiendavirtual";
+	const DB_NAME = "bd_domos_y_ensambles";
 	const DB_USER = "root";
 	const DB_PASSWORD = "";
 	const DB_CHARSET = "utf8";
@@ -45,10 +45,10 @@
 	const DIRECCION = "Avenida las Américas Zona 13, Guatemala";
 	const TELEMPRESA = "+(502)78787845";
 	const WHATSAPP = "+50278787845";
-	const EMAIL_EMPRESA = "info@abelosh.com";
-	const EMAIL_PEDIDOS = "info@abelosh.com"; 
-	const EMAIL_SUSCRIPCION = "info@abelosh.com";
-	const EMAIL_CONTACTO = "info@abelosh.com";
+	const EMAIL_EMPRESA = "domosyensambles01@gmail.com";
+	const EMAIL_PEDIDOS = "domosyensambles01@gmail.com"; 
+	const EMAIL_SUSCRIPCION = "domosyensambles01@gmail.com";
+	const EMAIL_CONTACTO = "domosyensambles01@gmail.com";
 
 	const CAT_SLIDER = "1,2,3";
 	const CAT_BANNER = "4,5,6";

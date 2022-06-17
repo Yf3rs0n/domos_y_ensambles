@@ -1,6 +1,6 @@
 <?php 
 require_once("Models/TTipoPago.php"); 
-class Pedidos extends Controllers{
+class Contratos extends Controllers{
 	use TTipoPago;
 	public function __construct()
 	{
@@ -11,10 +11,10 @@ class Pedidos extends Controllers{
 			header('Location: '.base_url().'/login');
 			die();
 		}
-		getPermisos(MPEDIDOS);
+		getPermisos(MCONTRATOS);
 	}
 
-	public function Pedidos()
+	public function Contratos()
 	{
 		if(empty($_SESSION['permisosMod']['r'])){
 			header("Location:".base_url().'/dashboard');
@@ -22,17 +22,17 @@ class Pedidos extends Controllers{
 		$data['page_tag'] = "Contratos";
 		$data['page_title'] = "CONTRATOS <small> Domos y Ensambles</small>";
 		$data['page_name'] = "Contratos";
-		$data['page_functions_js'] = "functions_pedidos.js";
-		$this->views->getView($this,"pedidos",$data);
+		$data['page_functions_js'] = "functions_contratos.js";
+		$this->views->getView($this,"contratos",$data);
 	}
 
-	public function getPedidos(){
+	public function getContratos(){
 		if($_SESSION['permisosMod']['r']){
 			$idpersona = "";
 			if( $_SESSION['userData']['idrol'] == RCLIENTES ){
 				$idpersona = $_SESSION['userData']['idpersona'];
 			}
-			$arrData = $this->model->selectPedidos($idpersona);
+			$arrData = $this->model->selectContratos($idpersona);
 			//dep($arrData);
 			for ($i=0; $i < count($arrData); $i++) {
 				$btnView = '';
@@ -44,13 +44,13 @@ class Pedidos extends Controllers{
 				
 				if($_SESSION['permisosMod']['r']){
 					
-					$btnView .= ' <a title="Ver Detalle" href="'.base_url().'/pedidos/orden/'.$arrData[$i]['idpedido'].'" target="_blanck" class="btn btn-info btn-sm"> <i class="far fa-eye"></i> </a>
+					$btnView .= ' <a title="Ver Detalle" href="'.base_url().'/contratos/orden/'.$arrData[$i]['idcontrato'].'" target="_blanck" class="btn btn-info btn-sm"> <i class="far fa-eye"></i> </a>
 
-						<a title="Generar PDF" href="'.base_url().'/factura/generarFactura/'.$arrData[$i]['idpedido'].'" target="_blanck" class="btn btn-danger btn-sm"> <i class="fas fa-file-pdf"></i> </a> ';
+						<a title="Generar PDF" href="'.base_url().'/factura/generarFactura/'.$arrData[$i]['idcontrato'].'" target="_blanck" class="btn btn-danger btn-sm"> <i class="fas fa-file-pdf"></i> </a> ';
 
 				}
 				if($_SESSION['permisosMod']['u']){
-					$btnEdit = '<button class="btn btn-primary  btn-sm" onClick="fntEditInfo(this,'.$arrData[$i]['idpedido'].')" title="Editar pedido"><i class="fas fa-pencil-alt"></i></button>';
+					$btnEdit = '<button class="btn btn-primary  btn-sm" onClick="fntEditInfo(this,'.$arrData[$i]['idcontrato'].')" title="Editar contrato"><i class="fas fa-pencil-alt"></i></button>';
 				}
 				$arrData[$i]['options'] = '<div class="text-center">'.$btnView.' '.$btnEdit.' '.$btnDelete.'</div>';
 			}
@@ -59,9 +59,9 @@ class Pedidos extends Controllers{
 		die();
 	}
 
-	public function orden($idpedido){
-		if(!is_numeric($idpedido)){
-			header("Location:".base_url().'/pedidos');
+	public function orden($idcontrato){
+		if(!is_numeric($idcontrato)){
+			header("Location:".base_url().'/contratos');
 		}
 		if(empty($_SESSION['permisosMod']['r'])){
 			header("Location:".base_url().'/dashboard');
@@ -72,24 +72,24 @@ class Pedidos extends Controllers{
 		}
 		
 		$data['page_tag'] = "Factura";
-		$data['page_title'] = "PEDIDO <small> Domos y Ensambles</small>";
+		$data['page_title'] = "CONTRATO <small> Domos y Ensambles</small>";
 		$data['page_name'] = "Factura";
-		$data['arrPedido'] = $this->model->selectPedido($idpedido,$idpersona);
+		$data['arrContrato'] = $this->model->selectContrato($idcontrato,$idpersona);
 		$this->views->getView($this,"orden",$data);
 	}
 
 
-	public function getPedido(string $pedido){
+	public function getContrato(string $contrato){
 		if($_SESSION['permisosMod']['u'] and $_SESSION['userData']['idrol'] != RCLIENTES){
-			if($pedido == ""){
+			if($contrato == ""){
 				$arrResponse = array("status" => false, "msg" => 'Datos incorrectos.');
 			}else{
-				$requestPedido = $this->model->selectPedido($pedido,"");
-				if(empty($requestPedido)){
+				$requestContrato = $this->model->selectContrato($contrato,"");
+				if(empty($requestContrato)){
 					$arrResponse = array("status" => false, "msg" => "Datos no disponibles.");
 				}else{
-					$requestPedido['tipospago'] = $this->getTiposPagoT();
-					$htmlModal = getFile("Template/Modals/modalPedido",$requestPedido);
+					$requestContrato['tipospago'] = $this->getTiposPagoT();
+					$htmlModal = getFile("Template/Modals/modalContrato",$requestContrato);
 					$arrResponse = array("status" => true, "html" => $htmlModal);
 				}
 			}
@@ -98,24 +98,24 @@ class Pedidos extends Controllers{
 		die();
 	}
 
-	public function setPedido(){
+	public function setContrato(){
 		if($_POST){
 			if($_SESSION['permisosMod']['u'] and $_SESSION['userData']['idrol'] != RCLIENTES){
 
-				$idpedido = !empty($_POST['idpedido']) ? intval($_POST['idpedido']) : "";
+				$idcontrato = !empty($_POST['idcontrato']) ? intval($_POST['idcontrato']) : "";
 				$estado = !empty($_POST['listEstado']) ? strClean($_POST['listEstado']) : "";
 				$idtipopago =  !empty($_POST['listTipopago']) ? intval($_POST['listTipopago']) : "";
 
 
-				if($idpedido == ""){
+				if($idcontrato == ""){
 					$arrResponse = array("status" => false, "msg" => 'Datos incorrectos.');
 				}else{
 					if($idtipopago == ""){
 						if($estado == ""){
 							$arrResponse = array("status" => false, "msg" => 'Datos incorrectos.');
 						}else{
-							$requestPedido = $this->model->updatePedido($idpedido,"","",$estado);
-							if($requestPedido){
+							$requestContrato = $this->model->updateContrato($idcontrato,"","",$estado);
+							if($requestContrato){
 								$arrResponse = array("status" => true, "msg" => "Datos actualizados correctamente");
 							}else{
 								$arrResponse = array("status" => false, "msg" => "No es posible actualizar la información.");
@@ -125,8 +125,8 @@ class Pedidos extends Controllers{
 						if($idtipopago =="" or $estado == ""){
 							$arrResponse = array("status" => false, "msg" => 'Datos incorrectos.');
 						}else{
-							$requestPedido = $this->model->updatePedido($idpedido,$idtipopago,$estado);
-							if($requestPedido){
+							$requestContrato = $this->model->updateContrato($idcontrato,$idtipopago,$estado);
+							if($requestContrato){
 								$arrResponse = array("status" => true, "msg" => "Datos actualizados correctamente");
 							}else{
 								$arrResponse = array("status" => false, "msg" => "No es posible actualizar la información.");

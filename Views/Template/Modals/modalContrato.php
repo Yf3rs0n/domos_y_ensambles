@@ -1,21 +1,21 @@
 <!-- Modal -->
-<div class="modal fade" id="modalFormPedido" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal fade" id="modalFormContrato" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog" >
     <div class="modal-content">
       <div class="modal-header headerUpdate">
-        <h5 class="modal-title" id="titleModal">Actualizar Pedido</h5>
+        <h5 class="modal-title" id="titleModal">Actualizar Contrato</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-            <form id="formUpdatePedido" name="formUpdatePedido" class="form-horizontal">
-              <input type="hidden" id="idpedido" name="idpedido" value="<?= $data['orden']['idpedido'] ?>" required="">
+            <form id="formUpdateContrato" name="formUpdateContrato" class="form-horizontal">
+              <input type="hidden" id="idcontrato" name="idcontrato" value="<?= $data['orden']['idcontrato'] ?>" required="">
               <table class="table table-bordered">
                   <tbody>
                       <tr>
-                          <td width="210">No. Pedido</td>
-                          <td><?= $data['orden']['idpedido'] ?></td>
+                          <td width="210">No. Contrato</td>
+                          <td><?= $data['orden']['idcontrato'] ?></td>
                       </tr>
                       <tr>
                           <td>Cliente:</td>

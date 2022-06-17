@@ -6,7 +6,7 @@
 			parent::__construct();
 		}
 
-		public function selectPedido(int $idpedido, $idpersona = NULL){
+		public function selectContrato(int $idcontrato, $idpersona = NULL){
 			$busqueda = "";
 			if($idpersona != NULL){
 				$busqueda = " AND p.personaid =".$idpersona;
@@ -22,13 +22,13 @@
 							p.materiales,
 							P.detalles,
 							p.status
-					FROM pedido as p
+					FROM contrato as p
 					INNER JOIN tipopago t
 					ON p.tipopagoid = t.idtipopago
-					WHERE p.idpedido =  $idpedido ".$busqueda;
-			$requestPedido = $this->select($sql);
-			if(!empty($requestPedido)){
-				$idpersona = $requestPedido['personaid'];
+					WHERE p.idcontrato =  $idcontrato ".$busqueda;
+			$requestContrato = $this->select($sql);
+			if(!empty($requestContrato)){
+				$idpersona = $requestContrato['personaid'];
 				$sql_cliente = "SELECT idpersona,
 										nombres,
 										apellidos,
@@ -42,13 +42,13 @@
 				$sql_detalle = "SELECT p.idproducto,
 											p.nombre as producto,
 											d.cantidad
-									FROM detalle_pedido d
+									FROM detalle_contrato d
 									INNER JOIN producto p
 									ON d.productoid = p.idproducto
-									WHERE d.pedidoid = $idpedido";
+									WHERE d.contratoid = $idcontrato";
 				$requestProductos = $this->select_all($sql_detalle);
 				$request = array('cliente' => $requestcliente,
-								'orden' => $requestPedido,
+								'orden' => $requestContrato,
 								'detalle' => $requestProductos
 								 );
 			}

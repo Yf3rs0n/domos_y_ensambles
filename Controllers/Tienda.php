@@ -280,7 +280,7 @@
 					//Pago contra entrega
 					if(empty($_POST['datapay'])){
 						//Crear pedido
-						$request_pedido = $this->insertPedido($personaid,
+						$request_contrato = $this->insertContrato($personaid,
 															$costo_envio,
 															$monto, 
 															$tipopagoid,
@@ -288,27 +288,27 @@
 															$materiales,
 															$detalles, 
 															$status);
-						if($request_pedido > 0 ){
+						if($request_contrato > 0 ){
 							//Insertamos detalle
 							foreach ($_SESSION['arrCarrito'] as $producto) {
 								$productoid = $producto['idproducto'];
 								$cantidad = $producto['cantidad'];
 								$materiales = $producto['materiales'];
 								$detalles = $producto['detalles'];
-								$this->insertDetalle($request_pedido,$productoid,$cantidad,$materiales,$detalles);
+								$this->insertDetalle($request_contrato,$productoid,$cantidad,$materiales,$detalles);
 							}
 
-							$infoOrden = $this->getPedido($request_pedido);
-							$dataEmailOrden = array('asunto' => "Se ha creado la orden No.".$request_pedido,
+							$infoOrden = $this->getContrato($request_contrato);
+							$dataEmailOrden = array('asunto' => "Se ha creado la orden No.".$request_contrato,
 													'email' => $_SESSION['userData']['email_user'], 
 													'emailCopia' => EMAIL_PEDIDOS,
-													'pedido' => $infoOrden );
+													'contrato' => $infoOrden );
 							sendEmail($dataEmailOrden,"email_notificacion_orden");
 
-							$orden = openssl_encrypt($request_pedido, METHODENCRIPT, KEY);
+							$orden = openssl_encrypt($request_contrato, METHODENCRIPT, KEY);
 							$arrResponse = array("status" => true, 
 											"orden" => $orden, 
-											"msg" => 'Pedido realizado'
+											"msg" => 'contrato realizado'
 										);
 							$_SESSION['dataorden'] = $arrResponse;
 							unset($_SESSION['arrCarrito']);
@@ -316,27 +316,27 @@
 						}
 					}
 				}else{
-					$arrResponse = array("status" => false, "msg" => 'No es posible procesar el pedido.');
+					$arrResponse = array("status" => false, "msg" => 'No es posible procesar el contrato.');
 				}
 			}else{
-				$arrResponse = array("status" => false, "msg" => 'No es posible procesar el pedido.');
+				$arrResponse = array("status" => false, "msg" => 'No es posible procesar el contrato.');
 			}
 
 			echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
 			die();
 		}
 
-		public function confirmarpedido(){
+		public function confirmarcontrato(){
 			if(empty($_SESSION['dataorden'])){
 				header("Location: ".base_url());
 			}else{
 				$dataorden = $_SESSION['dataorden'];
-				$idpedido = openssl_decrypt($dataorden['orden'], METHODENCRIPT, KEY);
-				$data['page_tag'] = "Confirmar Pedido";
-				$data['page_title'] = "Confirmar Pedido";
-				$data['page_name'] = "confirmarpedido";
-				$data['orden'] = $idpedido;
-				$this->views->getView($this,"confirmarpedido",$data);
+				$idcontrato = openssl_decrypt($dataorden['orden'], METHODENCRIPT, KEY);
+				$data['page_tag'] = "Confirmar Contrato";
+				$data['page_title'] = "Confirmar Contrato";
+				$data['page_name'] = "confirmarContrato";
+				$data['orden'] = $idcontrato;
+				$this->views->getView($this,"confirmarcontrato",$data);
 			}
 			unset($_SESSION['dataorden']);
 		}

@@ -44,9 +44,9 @@ trait TCliente{
         return $return;
 	}
 
-	public function insertPedido(int $personaid, float $costo_envio, string $monto, int $tipopagoid, string $direccionenvio,string $materiales, string $detalles, string $status){
+	public function insertContrato(int $personaid, float $costo_envio, string $monto, int $tipopagoid, string $direccionenvio,string $materiales, string $detalles, string $status){
 		$this->con = new Mysql();
-		$query_insert  = "INSERT INTO pedido(personaid,costo_envio,monto,tipopagoid,direccion_envio,materiales,detalles,status) 
+		$query_insert  = "INSERT INTO contrato(personaid,costo_envio,monto,tipopagoid,direccion_envio,materiales,detalles,status) 
 							  VALUES(?,?,?,?,?,?,?,?)";
 		$arrData = array($personaid,
     						$costo_envio,
@@ -62,11 +62,11 @@ trait TCliente{
 	    return $return;
 	}
 
-	public function insertDetalle(int $idpedido, int $productoid, int $cantidad){
+	public function insertDetalle(int $idcontrato, int $productoid, int $cantidad){
 		$this->con = new Mysql();
-		$query_insert  = "INSERT INTO detalle_pedido(pedidoid,productoid,cantidad) 
+		$query_insert  = "INSERT INTO detalle_contrato(contratoid,productoid,cantidad) 
 							  VALUES(?,?,?)";
-		$arrData = array($idpedido,
+		$arrData = array($idcontrato,
     					$productoid,
 						$cantidad
 					);
@@ -75,10 +75,10 @@ trait TCliente{
 	    return $return;
 	}
 
-	public function insertDetalleTemp(array $pedido){
-		$this->intIdUsuario = $pedido['idcliente'];
-		$this->intIdTransaccion = $pedido['idtransaccion'];
-		$productos = $pedido['productos'];
+	public function insertDetalleTemp(array $contrato){
+		$this->intIdUsuario = $contrato['idcliente'];
+		$this->intIdTransaccion = $contrato['idtransaccion'];
+		$productos = $contrato['productos'];
 
 		$this->con = new Mysql();
 		$sql = "SELECT * FROM detalle_temp WHERE 
@@ -117,10 +117,10 @@ trait TCliente{
 		}
 	}
 
-	public function getPedido(int $idpedido){
+	public function getContrato(int $idcontrato){
 		$this->con = new Mysql();
 		$request = array();
-		$sql = "SELECT p.idpedido,
+		$sql = "SELECT p.idcontrato,
 							p.personaid,
 							p.fecha,
 							p.costo_envio,
@@ -131,22 +131,22 @@ trait TCliente{
 							p.materiales,
 							p.detalles,
 							p.status
-					FROM pedido as p
+					FROM contrato as p
 					INNER JOIN tipopago t
 					ON p.tipopagoid = t.idtipopago
-					WHERE p.idpedido =  $idpedido";
-		$requestPedido = $this->con->select($sql);
-		if(count($requestPedido) > 0){
+					WHERE p.idcontrato =  $idcontrato";
+		$requestContrato = $this->con->select($sql);
+		if(count($requestContrato) > 0){
 			$sql_detalle = "SELECT p.idproducto,
 											p.nombre as producto,
 											d.cantidad
-									FROM detalle_pedido d
+									FROM detalle_contrato d
 									INNER JOIN producto p
 									ON d.productoid = p.idproducto
-									WHERE d.pedidoid = $idpedido
+									WHERE d.contratoid = $idcontrato
 									";
 			$requestProductos = $this->con->select_all($sql_detalle);
-			$request = array('orden' => $requestPedido,
+			$request = array('orden' => $requestContrato,
 							'detalle' => $requestProductos
 							);
 		}

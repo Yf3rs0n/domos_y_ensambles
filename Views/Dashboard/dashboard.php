@@ -48,11 +48,11 @@
         <?php } ?>
         <?php if(!empty($_SESSION['permisos'][5]['r'])){ ?>
         <div class="col-md-6 col-lg-3">
-          <a href="<?= base_url() ?>/pedidos" class="linkw">
+          <a href="<?= base_url() ?>/contratos" class="linkw">
             <div class="widget-small danger coloured-icon"><i class="icon fa fa-shopping-cart fa-3x"></i>
               <div class="info">
                 <h4>Contratos</h4>
-                <p><b><?= $data['pedidos'] ?></b></p>
+                <p><b><?= $data['contratos'] ?></b></p>
               </div>
             </div>
           </a>
@@ -63,7 +63,7 @@
         <?php if(!empty($_SESSION['permisos'][5]['r'])){ ?>
         <div class="col-md-6">
           <div class="tile">
-            <h3 class="tile-title">Últimos Pedidos</h3>
+            <h3 class="tile-title">Últimos Contratos</h3>
             <table class="table table-striped table-sm">
               <thead>
                 <tr>
@@ -77,14 +77,14 @@
               <tbody>
                 <?php 
                     if(count($data['lastOrders']) > 0 ){
-                      foreach ($data['lastOrders'] as $pedido) {
+                      foreach ($data['lastOrders'] as $contrato) {
                  ?>
                 <tr>
-                  <td><?= $pedido['idpedido'] ?></td>
-                  <td><?= $pedido['nombre'] ?></td>
-                  <td><?= $pedido['status'] ?></td>
-                  <td class="text-right"><?= SMONEY." ".formatMoney($pedido['monto']) ?></td>
-                  <td><a href="<?= base_url() ?>/pedidos/orden/<?= $pedido['idpedido'] ?>" target="_blank"><i class="fa fa-eye" aria-hidden="true"></i></a></td>
+                  <td><?= $contrato['idcontrato'] ?></td>
+                  <td><?= $contrato['nombre'] ?></td>
+                  <td><?= $contrato['status'] ?></td>
+                  <td class="text-right"><?= SMONEY." ".formatMoney($contrato['monto']) ?></td>
+                  <td><a href="<?= base_url() ?>/contratos/orden/<?= $contrato['idcontrato'] ?>" target="_blank"><i class="fa fa-eye" aria-hidden="true"></i></a></td>
                 </tr>
                 <?php } 
                   } ?>

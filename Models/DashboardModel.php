@@ -24,7 +24,7 @@
 			$total = $request['total']; 
 			return $total;
 		}
-		public function cantPedidos(){
+		public function cantContratos(){
 			$rolid = $_SESSION['userData']['idrol'];
 			$idUser = $_SESSION['userData']['idpersona'];
 			$where = "";
@@ -32,7 +32,7 @@
 				$where = " WHERE personaid = ".$idUser;
 			}
 
-			$sql = "SELECT COUNT(*) as total FROM pedido ".$where;
+			$sql = "SELECT COUNT(*) as total FROM contrato ".$where;
 			$request = $this->select($sql);
 			$total = $request['total']; 
 			return $total;
@@ -45,19 +45,19 @@
 				$where = " WHERE p.personaid = ".$idUser;
 			}
 
-			$sql = "SELECT p.idpedido, CONCAT(pr.nombres,' ',pr.apellidos) as nombre, p.monto, p.status 
-					FROM pedido p
+			$sql = "SELECT p.idcontrato, CONCAT(pr.nombres,' ',pr.apellidos) as nombre, p.monto, p.status 
+					FROM contrato p
 					INNER JOIN persona pr
 					ON p.personaid = pr.idpersona
 					$where
-					ORDER BY p.idpedido DESC LIMIT 10 ";
+					ORDER BY p.idcontrato DESC LIMIT 10 ";
 			$request = $this->select_all($sql);
 			return $request;
 		}	
 		public function selectPagosMes(int $anio, int $mes){
 
 			$sql = "SELECT p.tipopagoid, tp.tipopago, COUNT(p.tipopagoid) as cantidad, SUM(p.monto) as total 
-					FROM pedido p 
+					FROM contrato p 
 					INNER JOIN tipopago tp 
 					ON p.tipopagoid = tp.idtipopago 
 					WHERE MONTH(p.fecha) = $mes AND YEAR(p.fecha) = $anio GROUP BY tipopagoid";
@@ -81,8 +81,8 @@
 			for ($i=0; $i < $dias ; $i++) { 
 				$date = date_create($anio."-".$mes."-".$n_dia);
 				$fechaVenta = date_format($date,"Y-m-d");
-				$sql = "SELECT DAY(fecha) AS dia, COUNT(idpedido) AS cantidad, SUM(monto) AS total 
-						FROM pedido 
+				$sql = "SELECT DAY(fecha) AS dia, COUNT(idcontrato) AS cantidad, SUM(monto) AS total 
+						FROM contrato 
 						WHERE DATE(fecha) = '$fechaVenta' AND status = 'Completo' ".$where;
 				$ventaDia = $this->select($sql);
 				$ventaDia['dia'] = $n_dia;
@@ -101,7 +101,7 @@
 			for ($i=1; $i <= 12; $i++) { 
 				$arrData = array('anio'=>'','no_mes'=>'','mes'=>'','venta'=>'');
 				$sql = "SELECT $anio AS anio, $i AS mes, SUM(monto) AS venta 
-						FROM pedido 
+						FROM contrato 
 						WHERE MONTH(fecha)= $i AND YEAR(fecha) = $anio AND status = 'Completo' 
 						GROUP BY MONTH(fecha) ";
 				$ventaMes = $this->select($sql);

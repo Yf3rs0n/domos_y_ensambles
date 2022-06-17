@@ -6,22 +6,22 @@
     </div>
     <ul class="app-breadcrumb breadcrumb">
       <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
-      <li class="breadcrumb-item"><a href="<?= base_url(); ?>/pedidos"> Pedidos</a></li>
+      <li class="breadcrumb-item"><a href="<?= base_url(); ?>/contratos"> Contratos</a></li>
     </ul>
   </div>
   <div class="row">
     <div class="col-md-12">
       <div class="tile">
         <?php
-          if(empty($data['arrPedido'])){
+          if(empty($data['arrContrato'])){
         ?>
         <p>Datos no encontrados</p>
         <?php }else{
-            $cliente = $data['arrPedido']['cliente']; 
-            $orden = $data['arrPedido']['orden'];
-            $detalle = $data['arrPedido']['detalle'];
+            $cliente = $data['arrContrato']['cliente']; 
+            $orden = $data['arrContrato']['orden'];
+            $detalle = $data['arrContrato']['detalle'];
          ?>
-        <section id="sPedido" class="invoice">
+        <section id="sContrato" class="invoice">
           <div class="row mb-4">
             <div class="col-6">
               <h2 class="page-header">Domos y Ensambles</h2>
@@ -46,7 +46,7 @@
                 Email: <?= $cliente['email_user'] ?>
                </address>
             </div>
-            <div class="col-4"><b>Orden #<?= $orden['idpedido'] ?></b><br> 
+            <div class="col-4"><b>Orden #<?= $orden['idcontrato'] ?></b><br> 
                 <b>Pago: </b><?= $orden['tipopago'] ?><br>
                 <b>Estado:</b> <?= $orden['status'] ?> <br>
                 <b>Monto:</b> <?= SMONEY.' '. formatMoney($orden['monto']) ?>
@@ -120,7 +120,7 @@
             </div>
           </div>
           <div class="row d-print-none mt-2">
-            <div class="col-12 text-right"><a class="btn btn-primary" href="javascript:window.print('#sPedido');" ><i class="fa fa-print"></i> Imprimir</a></div>
+            <div class="col-12 text-right"><a class="btn btn-primary" href="javascript:window.print('#sContrato');" ><i class="fa fa-print"></i> Imprimir</a></div>
           </div>
         </section>
         <?php } ?>

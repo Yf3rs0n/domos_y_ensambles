@@ -66,7 +66,7 @@
 	const MUSUARIOS = 2;
 	const MCLIENTES = 3;
 	const MPRODUCTOS = 4;
-	const MPEDIDOS = 5;
+	const MCONTRATOS = 5;
 	const MCATEGORIAS = 6;
 	const MSUSCRIPTORES = 7;
 	const MDCONTACTOS = 8;

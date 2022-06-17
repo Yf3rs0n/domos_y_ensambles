@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 16-06-2022 a las 04:43:27
+-- Tiempo de generación: 17-06-2022 a las 05:00:42
 -- Versión del servidor: 10.4.21-MariaDB
 -- Versión de PHP: 8.0.10
 
@@ -74,28 +74,63 @@ INSERT INTO `contacto` (`id`, `nombre`, `email`, `mensaje`, `ip`, `dispositivo`,
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `detalle_pedido`
+-- Estructura de tabla para la tabla `contrato`
 --
 
-CREATE TABLE `detalle_pedido` (
+CREATE TABLE `contrato` (
+  `idcontrato` bigint(20) NOT NULL,
+  `personaid` bigint(20) NOT NULL,
+  `fecha` datetime NOT NULL DEFAULT current_timestamp(),
+  `costo_envio` decimal(10,2) NOT NULL DEFAULT 0.00,
+  `monto` decimal(11,2) NOT NULL,
+  `tipopagoid` bigint(20) NOT NULL,
+  `direccion_envio` text COLLATE utf8mb4_swedish_ci NOT NULL,
+  `materiales` text COLLATE utf8mb4_swedish_ci NOT NULL,
+  `detalles` text COLLATE utf8mb4_swedish_ci NOT NULL,
+  `status` varchar(100) COLLATE utf8mb4_swedish_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_swedish_ci;
+
+--
+-- Volcado de datos para la tabla `contrato`
+--
+
+INSERT INTO `contrato` (`idcontrato`, `personaid`, `fecha`, `costo_envio`, `monto`, `tipopagoid`, `direccion_envio`, `materiales`, `detalles`, `status`) VALUES
+(1, 3, '2021-08-20 03:41:57', '50.00', '450.00', 3, 'Antigua Guatemala, Antigua Guatemala', '', '', 'Pendiente'),
+(2, 3, '2021-08-20 03:48:39', '50.00', '350.00', 1, 'Guatemala, Guatemala', '', '', 'Completo'),
+(3, 1, '2022-05-25 12:28:34', '5.00', '205.00', 4, 'ede, dsd', '', '', 'Pendiente'),
+(4, 1, '2022-06-07 14:32:47', '5.00', '6.00', 2, 'Cr47872, Medellín', '', '', 'Pendiente'),
+(5, 1, '2022-06-07 14:36:29', '5.00', '6.00', 2, 'Cr26262, Medellin', '', '', 'Pendiente'),
+(6, 1, '2022-06-07 14:38:17', '5.00', '6.00', 3, 'Cr 49 #21-33, Medellín', '', '', 'Pendiente'),
+(7, 1, '2022-06-07 14:40:02', '5.00', '6.00', 3, 'Cr12, Medellín', '', '', 'Completo'),
+(8, 1, '2022-06-07 14:41:30', '5.00', '6.00', 2, 'Cr 4773 1122, Medellín', '', '', 'Aprobado'),
+(9, 1, '2022-06-16 19:41:16', '5.00', '6.00', 3, 'x, x', 'x', 'x', 'Pendiente');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `detalle_contrato`
+--
+
+CREATE TABLE `detalle_contrato` (
   `id` bigint(20) NOT NULL,
-  `pedidoid` bigint(20) NOT NULL,
+  `contratoid` bigint(20) NOT NULL,
   `productoid` bigint(20) NOT NULL,
   `precio` decimal(11,2) NOT NULL,
   `cantidad` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_swedish_ci;
 
 --
--- Volcado de datos para la tabla `detalle_pedido`
+-- Volcado de datos para la tabla `detalle_contrato`
 --
 
-INSERT INTO `detalle_pedido` (`id`, `pedidoid`, `productoid`, `precio`, `cantidad`) VALUES
+INSERT INTO `detalle_contrato` (`id`, `contratoid`, `productoid`, `precio`, `cantidad`) VALUES
 (1, 1, 2, '200.00', 1),
 (2, 1, 1, '100.00', 2),
 (3, 2, 1, '100.00', 3),
 (4, 3, 2, '200.00', 1),
 (5, 7, 2, '0.00', 1),
-(6, 8, 2, '0.00', 1);
+(6, 8, 2, '0.00', 1),
+(7, 9, 2, '0.00', 1);
 
 -- --------------------------------------------------------
 
@@ -147,39 +182,6 @@ INSERT INTO `modulo` (`idmodulo`, `titulo`, `descripcion`, `status`) VALUES
 (7, 'Suscriptores', 'Suscriptores del sitio web', 1),
 (8, 'Contactos', 'Mensajes del formulario contacto', 1),
 (9, 'Páginas', 'Páginas del sitio web', 1);
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `pedido`
---
-
-CREATE TABLE `pedido` (
-  `idpedido` bigint(20) NOT NULL,
-  `personaid` bigint(20) NOT NULL,
-  `fecha` datetime NOT NULL DEFAULT current_timestamp(),
-  `costo_envio` decimal(10,2) NOT NULL DEFAULT 0.00,
-  `monto` decimal(11,2) NOT NULL,
-  `tipopagoid` bigint(20) NOT NULL,
-  `direccion_envio` text COLLATE utf8mb4_swedish_ci NOT NULL,
-  `materiales` text COLLATE utf8mb4_swedish_ci NOT NULL,
-  `detalles` text COLLATE utf8mb4_swedish_ci NOT NULL,
-  `status` varchar(100) COLLATE utf8mb4_swedish_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_swedish_ci;
-
---
--- Volcado de datos para la tabla `pedido`
---
-
-INSERT INTO `pedido` (`idpedido`, `personaid`, `fecha`, `costo_envio`, `monto`, `tipopagoid`, `direccion_envio`, `materiales`, `detalles`, `status`) VALUES
-(1, 3, '2021-08-20 03:41:57', '50.00', '450.00', 3, 'Antigua Guatemala, Antigua Guatemala', '', '', 'Pendiente'),
-(2, 3, '2021-08-20 03:48:39', '50.00', '350.00', 1, 'Guatemala, Guatemala', '', '', 'Completo'),
-(3, 1, '2022-05-25 12:28:34', '5.00', '205.00', 4, 'ede, dsd', '', '', 'Pendiente'),
-(4, 1, '2022-06-07 14:32:47', '5.00', '6.00', 2, 'Cr47872, Medellín', '', '', 'Pendiente'),
-(5, 1, '2022-06-07 14:36:29', '5.00', '6.00', 2, 'Cr26262, Medellin', '', '', 'Pendiente'),
-(6, 1, '2022-06-07 14:38:17', '5.00', '6.00', 3, 'Cr 49 #21-33, Medellín', '', '', 'Pendiente'),
-(7, 1, '2022-06-07 14:40:02', '5.00', '6.00', 3, 'Cr12, Medellín', '', '', 'Completo'),
-(8, 1, '2022-06-07 14:41:30', '5.00', '6.00', 2, 'Cr 4773 1122, Medellín', '', '', 'Aprobado');
 
 -- --------------------------------------------------------
 
@@ -414,12 +416,20 @@ ALTER TABLE `contacto`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `detalle_pedido`
+-- Indices de la tabla `contrato`
 --
-ALTER TABLE `detalle_pedido`
+ALTER TABLE `contrato`
+  ADD PRIMARY KEY (`idcontrato`),
+  ADD KEY `personaid` (`personaid`),
+  ADD KEY `tipopagoid` (`tipopagoid`);
+
+--
+-- Indices de la tabla `detalle_contrato`
+--
+ALTER TABLE `detalle_contrato`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `pedidoid` (`pedidoid`),
-  ADD KEY `productoid` (`productoid`);
+  ADD KEY `productoid` (`productoid`),
+  ADD KEY `contratoid` (`contratoid`) USING BTREE;
 
 --
 -- Indices de la tabla `imagen`
@@ -433,14 +443,6 @@ ALTER TABLE `imagen`
 --
 ALTER TABLE `modulo`
   ADD PRIMARY KEY (`idmodulo`);
-
---
--- Indices de la tabla `pedido`
---
-ALTER TABLE `pedido`
-  ADD PRIMARY KEY (`idpedido`),
-  ADD KEY `personaid` (`personaid`),
-  ADD KEY `tipopagoid` (`tipopagoid`);
 
 --
 -- Indices de la tabla `permisos`
@@ -505,10 +507,16 @@ ALTER TABLE `contacto`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT de la tabla `detalle_pedido`
+-- AUTO_INCREMENT de la tabla `contrato`
 --
-ALTER TABLE `detalle_pedido`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+ALTER TABLE `contrato`
+  MODIFY `idcontrato` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT de la tabla `detalle_contrato`
+--
+ALTER TABLE `detalle_contrato`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `imagen`
@@ -521,12 +529,6 @@ ALTER TABLE `imagen`
 --
 ALTER TABLE `modulo`
   MODIFY `idmodulo` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
-
---
--- AUTO_INCREMENT de la tabla `pedido`
---
-ALTER TABLE `pedido`
-  MODIFY `idpedido` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `permisos`
@@ -575,24 +577,17 @@ ALTER TABLE `tipopago`
 --
 
 --
--- Filtros para la tabla `detalle_pedido`
+-- Filtros para la tabla `contrato`
 --
-ALTER TABLE `detalle_pedido`
-  ADD CONSTRAINT `detalle_pedido_ibfk_1` FOREIGN KEY (`pedidoid`) REFERENCES `pedido` (`idpedido`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `detalle_pedido_ibfk_2` FOREIGN KEY (`productoid`) REFERENCES `producto` (`idproducto`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `contrato`
+  ADD CONSTRAINT `contrato_ibfk_1` FOREIGN KEY (`personaid`) REFERENCES `persona` (`idpersona`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `contrato_ibfk_2` FOREIGN KEY (`tipopagoid`) REFERENCES `tipopago` (`idtipopago`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `imagen`
 --
 ALTER TABLE `imagen`
   ADD CONSTRAINT `imagen_ibfk_1` FOREIGN KEY (`productoid`) REFERENCES `producto` (`idproducto`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `pedido`
---
-ALTER TABLE `pedido`
-  ADD CONSTRAINT `pedido_ibfk_1` FOREIGN KEY (`personaid`) REFERENCES `persona` (`idpersona`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `pedido_ibfk_2` FOREIGN KEY (`tipopagoid`) REFERENCES `tipopago` (`idtipopago`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `permisos`

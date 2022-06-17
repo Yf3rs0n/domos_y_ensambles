@@ -1,5 +1,5 @@
 <?php 
-	class PedidosModel extends Mysql
+	class ContratosModel extends Mysql
 	{
 		private $objCategoria;
 		public function __construct()
@@ -7,12 +7,12 @@
 			parent::__construct();
 		}
 
-		public function selectPedidos($idpersona = null){
+		public function selectContratos($idpersona = null){
 			$where = "";
 			if($idpersona != null){
 				$where = " WHERE p.personaid = ".$idpersona;
 			}
-			$sql = "SELECT p.idpedido,
+			$sql = "SELECT p.idcontrato,
 							DATE_FORMAT(p.fecha, '%d/%m/%Y') as fecha,
 							p.monto,
 							tp.tipopago,
@@ -20,7 +20,7 @@
 							p.materiales,
 							p.detalles,
 							p.status 
-					FROM pedido p 
+					FROM contrato p 
 					INNER JOIN tipopago tp
 					ON p.tipopagoid = tp.idtipopago $where ";
 			$request = $this->select_all($sql);
@@ -28,13 +28,13 @@
 
 		}	
 
-		public function selectPedido(int $idpedido, $idpersona = NULL){
+		public function selectContrato(int $idcontrato, $idpersona = NULL){
 			$busqueda = "";
 			if($idpersona != NULL){
 				$busqueda = " AND p.personaid =".$idpersona;
 			}
 			$request = array();
-			$sql = "SELECT p.idpedido,
+			$sql = "SELECT p.idcontrato,
 							p.personaid,
 							DATE_FORMAT(p.fecha, '%d/%m/%Y') as fecha,
 							p.costo_envio,
@@ -45,13 +45,13 @@
 							p.materiales,
 							P.detalles,
 							p.status
-					FROM pedido as p
+					FROM contrato as p
 					INNER JOIN tipopago t
 					ON p.tipopagoid = t.idtipopago
-					WHERE p.idpedido =  $idpedido ".$busqueda;
-			$requestPedido = $this->select($sql);
-			if(!empty($requestPedido)){
-				$idpersona = $requestPedido['personaid'];
+					WHERE p.idcontrato =  $idcontrato ".$busqueda;
+			$requestContrato = $this->select($sql);
+			if(!empty($requestContrato)){
+				$idpersona = $requestContrato['personaid'];
 				$sql_cliente = "SELECT idpersona,
 										nombres,
 										apellidos,
@@ -66,25 +66,25 @@
 											p.nombre as producto,
 											d.precio,
 											d.cantidad
-									FROM detalle_pedido d
+									FROM detalle_contrato d
 									INNER JOIN producto p
 									ON d.productoid = p.idproducto
-									WHERE d.pedidoid = $idpedido";
+									WHERE d.contratoid = $idcontrato";
 				$requestProductos = $this->select_all($sql_detalle);
 				$request = array('cliente' => $requestcliente,
-								'orden' => $requestPedido,
+								'orden' => $requestContrato,
 								'detalle' => $requestProductos
 								 );
 			}
 			return $request;
 		}
 
-		public function updatePedido(int $idpedido, $idtipopago = NULL, string $estado){
+		public function updateContrato(int $idcontrato, $idtipopago = NULL, string $estado){
 			if($idtipopago == NULL){
-				$query_insert  = "UPDATE pedido SET status = ?  WHERE idpedido = $idpedido ";
+				$query_insert  = "UPDATE contrato SET status = ?  WHERE idcontrato = $idcontrato ";
 	        	$arrData = array($estado);
 			}else{
-				$query_insert  = "UPDATE pedido SET tipopagoid = ?,status = ? WHERE idpedido = $idpedido";
+				$query_insert  = "UPDATE contrato SET tipopagoid = ?,status = ? WHERE idcontrato = $idcontrato";
 	        	$arrData = array(
 	        					$idtipopago,
 	    						$estado

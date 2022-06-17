@@ -1,17 +1,17 @@
-let tablePedidos;
+let tableContratos;
 let rowTable;
-tablePedidos = $('#tablePedidos').dataTable( {
+tableContratos = $('#tableContratos').dataTable( {
     "aProcessing":true,
     "aServerSide":true,
     "language": {
         "url": "//cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json"
     },
     "ajax":{
-        "url": " "+base_url+"/Pedidos/getPedidos",
+        "url": " "+base_url+"/Contratos/getContratos",
         "dataSrc":""
     },
     "columns":[
-        {"data":"idpedido"},
+        {"data":"idcontrato"},
         {"data":"fecha"},
         {"data":"monto"},
         {"data":"tipopago"},
@@ -68,12 +68,12 @@ tablePedidos = $('#tablePedidos').dataTable( {
 });
 
 
-function fntEditInfo(element,idpedido){
+function fntEditInfo(element,idcontrato){
     rowTable = element.parentNode.parentNode.parentNode;
     let request = (window.XMLHttpRequest) ? 
                     new XMLHttpRequest() : 
                     new ActiveXObject('Microsoft.XMLHTTP');
-    let ajaxUrl = base_url+'/Pedidos/getPedido/'+idpedido;
+    let ajaxUrl = base_url+'/Contratos/getContrato/'+idcontrato;
     divLoading.style.display = "flex";
     request.open("GET",ajaxUrl,true);
     request.send();
@@ -83,7 +83,7 @@ function fntEditInfo(element,idpedido){
             if(objData.status)
             {
                 document.querySelector("#divModal").innerHTML = objData.html;
-                $('#modalFormPedido').modal('show');
+                $('#modalFormContrato').modal('show');
                 $('select').selectpicker();
                 fntUpdateInfo();
             }else{
@@ -97,16 +97,16 @@ function fntEditInfo(element,idpedido){
 }
 
 function fntUpdateInfo(){
-    let formUpdatePedido = document.querySelector("#formUpdatePedido");
-    formUpdatePedido.onsubmit = function(e) {
+    let formUpdateContrato = document.querySelector("#formUpdateContrato");
+    formUpdateContrato.onsubmit = function(e) {
         e.preventDefault();
 
         let request = (window.XMLHttpRequest) ? 
                     new XMLHttpRequest() : 
                     new ActiveXObject('Microsoft.XMLHTTP');
-        let ajaxUrl = base_url+'/Pedidos/setPedido/';
+        let ajaxUrl = base_url+'/Contratos/setContrato/';
         divLoading.style.display = "flex";
-        let formData = new FormData(formUpdatePedido);
+        let formData = new FormData(formUpdateContrato);
         request.open("POST",ajaxUrl,true);
         request.send(formData);
         request.onreadystatechange = function(){
@@ -115,7 +115,7 @@ function fntUpdateInfo(){
                 let objData = JSON.parse(request.responseText);
                 if(objData.status){
                      swal("", objData.msg ,"success");
-                     $('#modalFormPedido').modal('hide');
+                     $('#modalFormContrato').modal('hide');
                     if(document.querySelector("#txtTransaccion")){
                         rowTable.cells[1].textContent = document.querySelector("#txtTransaccion").value;
                         rowTable.cells[4].textContent = document.querySelector("#listTipopago").selectedOptions[0].innerText;

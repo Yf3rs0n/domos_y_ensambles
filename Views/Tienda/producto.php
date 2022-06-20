@@ -84,7 +84,7 @@ $urlShared = base_url()."/tienda/producto/".$arrProducto['idproducto']."/".$arrP
 									</div> -->
 
 									<button id="<?= openssl_encrypt($arrProducto['idproducto'],METHODENCRIPT,KEY); ?>" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
-										Agregar al carrito
+										Agregar al contrato
 									</button>
 								</div>
 							</div>	
@@ -115,7 +115,7 @@ $urlShared = base_url()."/tienda/producto/".$arrProducto['idproducto']."/".$arrP
 		</div>
 
 		<div class="bg6 flex-c-m flex-w size-302 m-t-73 p-tb-15">
-			<h3>Productos Relacionados</h3>
+			<h3>Servicios Relacionados</h3>
 		</div>
 	</section>
 
@@ -143,7 +143,7 @@ $urlShared = base_url()."/tienda/producto/".$arrProducto['idproducto']."/".$arrP
 								<img src="<?= $portada ?>" alt="<?= $arrProductos[$p]['nombre'] ?>">
 
 								<a href="<?= base_url().'/tienda/producto/'.$arrProductos[$p]['idproducto'].'/'.$ruta; ?>" class="block2-btn flex-c-m stext-103 cl5 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04">
-									Ver producto
+									Ver servicio
 								</a>
 							</div>
 

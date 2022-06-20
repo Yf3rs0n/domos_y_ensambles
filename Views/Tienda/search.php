@@ -64,7 +64,7 @@ $arrProductos = $data['productos'];
 						<div class="block2-pic hov-img0">
 							<img src="<?= $portada ?>" alt="<?= $arrProductos[$p]['nombre'] ?>">
 							<a href="<?= base_url().'/tienda/producto/'.$arrProductos[$p]['idproducto'].'/'.$ruta; ?>" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04">
-								Ver producto
+								Ver servicio
 							</a>
 						</div>
 						<div class="block2-txt flex-w flex-t p-t-14">
@@ -92,7 +92,7 @@ $arrProductos = $data['productos'];
 				}
 			}else{
 				?>
-			<p>No hay productos para mostrar <a href="<?= base_url() ?>/tienda"> Ver productos</a></p>
+			<p>No hay productos para mostrar <a href="<?= base_url() ?>/tienda"> Ver servicios</a></p>
 			<?php 
 			} 
 			?>

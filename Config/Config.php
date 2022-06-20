@@ -38,13 +38,13 @@
 	const NOMBRE_EMPESA = "Domos y Ensambles";
 	const WEB_EMPRESA = "www.DomosyEnsambles.com";
 
-	const DESCRIPCION = "El mejor sitio de contrataciones online.";
+	const DESCRIPCION = "El mejor sitio de contrataciónes online.";
 	const SHAREDHASH = "Domos y Ensambles";
 
 	//Datos Empresa
-	const DIRECCION = "Avenida las Américas Zona 13, Guatemala";
-	const TELEMPRESA = "+(502)78787845";
-	const WHATSAPP = "+50278787845";
+	const DIRECCION = "Medellín, Antioquia";
+	const TELEMPRESA = "+(57)33322211";
+	const WHATSAPP = "+573114299500";
 	const EMAIL_EMPRESA = "domosyensambles01@gmail.com";
 	const EMAIL_PEDIDOS = "domosyensambles01@gmail.com"; 
 	const EMAIL_SUSCRIPCION = "domosyensambles01@gmail.com";

@@ -151,21 +151,16 @@
 							</li>
 
 							<li>
-								<a href="<?= base_url(); ?>/tienda">Tienda</a>
+								<a href="<?= base_url(); ?>/tienda">Servicios</a>
 							</li>
 
 							<li>
-								<a href="<?= base_url(); ?>/carrito">Carrito</a>
+								<a href="<?= base_url(); ?>/carrito">Contratos</a>
 							</li>
 							
 							<li>
 								<a href="<?= base_url(); ?>/nosotros">Nosotros</a>
 							</li>
-
-							<li>
-								<a href="<?= base_url(); ?>/sucursales">Sucursales</a>
-							</li>
-
 							<li>
 								<a href="<?= base_url(); ?>/contacto">Contacto</a>
 							</li>

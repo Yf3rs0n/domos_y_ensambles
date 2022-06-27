@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<title>Bienvenido Usuario</title>
+	<style type="text/css">
+		p{
+			font-family: arial;
+			letter-spacing: 1px;
+			color: #7f7f7f;
+			font-size: 15px;
+		}
+		a{
+			color: #EFAF06;
+			font-family: arial;
+			text-decoration: none;
+			text-align: center;
+			display: block;
+			font-size: 18px;
+		}
+		.x_sgwrap p{
+			font-size: 20px;
+		    line-height: 32px;
+		    color: #111;
+		    font-family: arial;
+		    text-align: center;
+		}
+		.x_title_gray {
+		    color: #EFAF06;
+		    padding: 5px 0;
+		    font-size: 15px;
+			border-top: 1px solid #CCC;
+		}
+		.x_title {
+		    padding: 08px 0;
+		    line-height: 25px;
+		    text-transform: uppercase;
+			border-bottom: 1px solid #CCC;
+		}
+		.x_title h1{
+			color: #EFAF06;
+			font-size: 25px;
+			font-family: 'arial';
+		}
+		.x_bluetext {
+		    color: #ffc107 !important;
+		}
+		.x_title_gray a{
+			text-align: center;
+			padding: 10px;
+			margin: auto;
+			color: #EFAF06;
+		}
+		.x_text_white a{
+			color: black;
+		}
+		.x_button_link {
+		    width: 100%;
+			max-width: 470px;
+		    height: 40px;
+		    display: block;
+		    color: black;
+		    margin: 20px auto;
+		    line-height: 40px;
+		    text-transform: uppercase;
+		    font-family: Arial Black,Arial Bold,Gadget,sans-serif;
+		}
+		.x_link{
+		    background-color: #EFAF06;
+		}
+		.x_textwhite {
+		    background-color: #111;
+		    color: #ffffff;
+		    padding: 10px;
+		    font-size: 15px;
+		    line-height: 20px;
+		}
+	</style>
+</head>
+<body>
+	<table align="center" cellpadding="0" cellspacing="0" bgcolor="#ffffff" style="text-align:center;">
+		<tbody>
+			<tr>
+				<td>
+					<div class="x_sgwrap x_title">
+						<h1><?= NOMBRE_EMPESA ?></h1>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<div class="x_sgwrap">
+						<p>Hola <?= $data['nombreUsuario']; ?></p>
+					</div>
+					<p>Bienvenido a nuestra sitio de contratciones en línea.</p>
+					<p>Ahora puedes ralizar tus contratos en línea sin salir de casa.</p>
+					<p>Accede a tu cuenta con tus credenciales:</p>
+					<p>Usuario: <strong><?= $data['email']; ?></strong></p>
+					<p>Contraseña: <strong><?= $data['password']; ?></strong></p>
+					<a href="<?= BASE_URL; ?>" target="_blank" class="x_button_link x_link">contratar ahora</a>
+					<p class="x_title_gray"><a href="<?= BASE_URL; ?>" target="_blanck"><?= WEB_EMPRESA; ?></a></p>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</body>
+</html>

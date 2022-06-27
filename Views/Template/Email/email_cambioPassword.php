@@ -8,7 +8,7 @@
 		p{
 			font-family: arial;
 			letter-spacing: 1px;
-			color: #ffc107;
+			color: #111;
 			font-size: 15px;
 		}
 		a{
@@ -22,7 +22,7 @@
 		.x_sgwrap p{
 			font-size: 20px;
 		    line-height: 32px;
-		    color: #ffc107;
+		    color: #111;
 		    font-family: arial;
 		    text-align: center;
 		}

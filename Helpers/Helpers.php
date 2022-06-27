@@ -127,7 +127,7 @@
         try {
             //Server settings
             $mail->SMTPDebug = SMTP::DEBUG_SERVER;                     //Enable verbose debug output
-            $mail->isSMTP();                                            //Send using SMTP
+            $mail->isSMTP();                                            //Send using SMTP Protocolo para transferencia simple de correo
             $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
             $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
             $mail->Username   = 'domosyensambles01@gmail.com';                     //SMTP username
